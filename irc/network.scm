@@ -139,7 +139,8 @@ tls: If set to #t use ssl (requires gnutls)"
   (if (connected? obj)
       (if (ssl? obj)
           (tls:send (get-ssl obj) msg)
-          (display msg (get-socket obj)))
+          (and (get-socket obj)
+               (display msg (get-socket obj))))
       (error-connect "Not connected")))
 
 (define (receive obj)
